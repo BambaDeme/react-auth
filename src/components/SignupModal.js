@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import { UserContext } from "../context/userContext";
 const SignupModal = () => {
+  const { modalState, toggleModals } = useContext(UserContext);
+  console.log(modalState, toggleModals);
   return (
     <>
-      <div className="position-fixed top-0 vw-100 vh-100">
-        <div className="w-100 h-100 bg-dark bg-opacity-75">
+      {modalState.signUpModal && (
+        <div className="position-fixed top-0 vw-100 vh-100">
+          <div
+            className="w-100 h-100 bg-dark bg-opacity-75"
+            onClick={() => toggleModals("close")}
+          ></div>
           <div
             className="position-absolute top-50 start-50 translate-middle"
             style={{ minWidth: "400px" }}
@@ -13,7 +20,10 @@ const SignupModal = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Sign up</h5>
-                  <button className="btn-close"></button>
+                  <button
+                    className="btn-close"
+                    onClick={() => toggleModals("close")}
+                  ></button>
                 </div>
 
                 <div className="modal-body">
@@ -65,7 +75,7 @@ const SignupModal = () => {
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
